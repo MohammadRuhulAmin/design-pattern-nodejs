@@ -91,7 +91,27 @@ Methods are shared across instances, reducing memory usage. Secondly the prototy
 Promotes reuse of methods and properties for similar objects.  
 
 
+3. Factory Pattern:
+
+Using Factory pattern we can easily manage multiple import statements to on single file and using that one file we can return the new instance 
+of the necessary class.
+
+Example:
+
+```javascript
+
+const Customer = require("./Customer");
+const Admin = require("./Admin");
+const Student = require("./Student")
 
 
+const personFactory = (name, email, type) =>{
+    if(type === 'Admin')return new Admin(name,email)
+    else if (type === 'Customer') return new Customer(name, email)
+    return new Student(name,email)
 
+}
 
+module.exports = personFactory;
+
+```
