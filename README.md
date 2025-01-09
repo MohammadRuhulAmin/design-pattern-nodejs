@@ -52,5 +52,32 @@ console.log('Are counter1 and counter2 the same instance?', counter1 === counter
 - The singleton ensures that state is consistent across your application and avoids multiple instances unnecessarily consuming resources.
 
 
-2. 
+2. Prototype pattern:
+
+Before learning prototype-pattern, we need to learn what is prototype.
+Every javaScript object has an internal property callad `[[Prototype]]`. Which points to 
+another object or null. the prototype property is used primarily with constructor functions to define properties and methods that should be shared by all instances of objects created using that constructor. 
+
+```javaScript
+
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+}
+Person.prototype.greet = function(){
+    console.log(`Hi ${this.name} , ${this.age}`)
+}
+const person1 = new Person('Ruhul',23);
+const person2 = new Person('Sakib',34);
+
+person1.greet()
+person2.greet()
+
+```
+But using class, The prototype is managed behind the scenes, but the concept remains same.
+Prototype is useful for performance optimization. 
+
+
+
+
 
