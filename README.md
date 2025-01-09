@@ -115,3 +115,79 @@ const personFactory = (name, email, type) =>{
 module.exports = personFactory;
 
 ```
+
+4. Builder Pattern:
+
+Lets we have a class, to assign the value to the property. we use constructor 
+
+```javascript
+class myClass {
+    constructor(name,email,pass){
+        this.name = name;
+        this.email = email;
+        this.pass = pass;
+    }
+}
+const mx = new myClass('ruhul','r@gmail.com','1223');
+
+```
+
+it is okay for a simple project. But look at this statement:
+
+```javascript
+const mx = new myClass('ruhul','r@gmail.com','1223');
+```
+without going to that class, it is impossible to know which property is what. To understand the property, we have to go to the specific file and 
+read the constructor then we can understand the real scenario which is very much time taking. To solve this issue we can use Builder pattern.
+
+class : Customer
+```javascript
+class Customer{
+    constructor(builder){
+        this.name = builder.name;
+        this.email = builder.email;
+        this.contact = builder.contact;
+    }
+}
+module.exports = Customer;
+```
+
+class: personBuilder
+```javascript
+const Customer = require('./Customer')
+class personBuilder{
+    constructor(){
+        if(personBuilder.instance){return this;}
+    }
+    setName(name){
+        this.name = name;
+        return this; 
+    }
+    setEmail(email){
+        this.email = email;
+        return this;
+    }
+    setContact(contact){
+        this.contact = contact;
+        return this;
+    }
+    build(){return new Customer(this);}
+}
+
+module.exports = personBuilder;
+
+```
+class: index.js
+
+```javascript
+const personBuilder = require('./Customer/customerBuilder')
+const {log} = require('node:console')
+
+const ruhul = new personBuilder().setName("Md. Ruhul Amin").setEmail("ruhul@ba-systems.com").setContact("01322-352864").build()
+log(ruhul)
+
+```
+
+
+
+
