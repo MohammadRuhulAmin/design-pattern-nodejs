@@ -59,23 +59,37 @@ Every javaScript object has an internal property callad `[[Prototype]]`. Which p
 another object or null. the prototype property is used primarily with constructor functions to define properties and methods that should be shared by all instances of objects created using that constructor. 
 
 ```javaScript
-
-function Person(name,age){
-    this.name = name;
-    this.age = age;
+class Vehicle{
+    constructor(make, model, year){
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+    getDetails(){return `${this.year} has ${this.make} ${this.model}`}
+    startEngine(){console.log(`${this.make} ${this.model}'s engine has started.`);}
+    honk(){console.log(`${this.make} ${this.model} says "Honk! Honk!"`);}
 }
-Person.prototype.greet = function(){
-    console.log(`Hi ${this.name} , ${this.age}`)
-}
-const person1 = new Person('Ruhul',23);
-const person2 = new Person('Sakib',34);
 
-person1.greet()
-person2.greet()
+Vehicle.prototype.speed = function(){return 123.4;}
+const car1 = new Vehicle("Toyota", "Corolla", 2020);
+Vehicle.prototype.sound =  function(){return "Hammbaaaa!"}
+/** also we can modify the method */
+Vehicle.prototype.startEngine = function(){
+    console.log('Modified Text')
+}
+console.log(car1.getDetails())
+car1.startEngine()
+car1.honk()
+console.log(car1.sound())
+console.log(car1.speed())
+
 
 ```
 But using class, The prototype is managed behind the scenes, but the concept remains same.
 Prototype is useful for performance optimization. 
+Methods are shared across instances, reducing memory usage. Secondly the prototype can be extended or modified dynamically.
+Promotes reuse of methods and properties for similar objects.  
+
 
 
 
